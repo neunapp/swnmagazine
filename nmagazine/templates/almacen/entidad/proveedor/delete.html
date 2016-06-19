@@ -1,0 +1,5 @@
+<form role="form" action="{% url 'entidad_app:provider-delete' provider.id %}" method="POST">{% csrf_token %}
+    <h6 class="subheader">¿Desea eliminar esta Zona<strong>{{ provider.name }}</strong>?</h6>
+    <button type="submit" class="tiny radius bg-rojo button">Si</button>
+    <a href="{% url 'entidad_app:provider-list' %}" class="tiny radius bg-blanco border-grey button">No</a>
+</form>

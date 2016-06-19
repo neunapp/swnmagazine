@@ -1,0 +1,32 @@
+<a href="{% url 'entidad_app:provider-add' %}">Agregar Nueva</a>
+<table id="responsive-example-table" class="table large-only">
+                        <thead>
+                            <tr>
+                                <th>name</th>
+                                <th>ruc</th>
+                                <th>telefonos</th>
+                                <th>email</th>
+                                <th>acccion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          {% for p in  provider_list %}
+                            <tr>
+                                <td>{{ p.name }}</td>
+                                <td>{{ p.ruc }}</td>
+                                <td>{{ p.phone }}</td>
+                                <td>{{ p.email }}</td>
+                                <td>
+                                    <a href="{% url 'entidad_app:provider-update' p.pk %}" class="tiny bg-amarillo no-margin radius button" title="Modificar">
+                                        M
+                                    </a>
+                                    <a href="{% url 'entidad_app:provider-delete' p.pk %}" class="tiny bg-rojo no-margin radius button" title="Eliminar">
+                                        E
+                                    </a>
+                                </td>
+                                {% empty %}
+                                    <td colspan="7">no hay proveedores :( <a href="{% url 'entidad_app:provider-add' %}">Agregar Nueva</a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
