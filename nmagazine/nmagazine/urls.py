@@ -6,6 +6,7 @@ from django.contrib import admin
 
 urlpatterns = [
     url(r'^', include('applications.almacen.entidad.urls', namespace="entidad_app")),
+    url(r'^', include('applications.almacen.recepcion.urls', namespace="recepcion_app")),
 
     url(r'^admin/', admin.site.urls),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

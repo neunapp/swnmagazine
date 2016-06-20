@@ -28,10 +28,7 @@ class Magazine(TimeStampedModel):
         blank=True,
         max_length=100
     )
-    day_expiration = models.PositiveIntegerField(
-        blank=True,
-        null=True
-    )
+    day_expiration = models.PositiveIntegerField(default=0)
     disable = models.BooleanField(default=False)
     user_created = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -153,14 +150,8 @@ class DetailGuide(TimeStampedModel):
         max_digits=10,
         decimal_places=3
     )
-    missing = models.PositiveIntegerField(
-        blank=True,
-        null=True
-    )
-    real_count = models.PositiveIntegerField(
-        blank=True,
-        null=True
-    )
+    missing = models.PositiveIntegerField(default=0)
+    real_count = models.PositiveIntegerField(default=0)
     afecto = models.BooleanField(default=False)
     user_created = models.ForeignKey(
         settings.AUTH_USER_MODEL,
