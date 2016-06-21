@@ -1,4 +1,11 @@
 Django==1.9.7
+<<<<<<< HEAD
 psycopg2==2.6.1
 Unipath==1.1
 
+=======
+django-model-utils==2.5
+Pillow==3.2.0
+psycopg2==2.6.1
+Unipath==1.1
+>>>>>>> ce6e6117548352eac5e6b98035bfc338b5be1edb

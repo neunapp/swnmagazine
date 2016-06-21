@@ -28,6 +28,9 @@ DJANGO_APPS = (
 )
 
 LOCAL_APPS = (
+    'applications.users',
+    'applications.almacen.entidad',
+    'applications.almacen.recepcion',
 )
 
 THIRD_PARTY_APPS = (
@@ -82,6 +85,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LANGUAGE_CODE = 'es-pe'
+
+AUTH_USER_MODEL = 'users.User'
 
 TIME_ZONE = 'UTC'
 
