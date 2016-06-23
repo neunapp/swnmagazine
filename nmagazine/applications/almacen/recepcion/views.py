@@ -8,6 +8,7 @@ from django.views.generic import (
     DetailView,
     DeleteView,
     ListView,
+    TemplateView,
     View,
 )
 from .models import Magazine, MagazineDay
@@ -56,3 +57,7 @@ class MagazineCreate(CreateView):
         magazine_dia2.save()
 
         return super(MagazineCreate, self).form_valid(form)
+
+
+class GuideRegisterView(TemplateView):
+    template_name = 'almacen/recepcion/guide/add.html'
