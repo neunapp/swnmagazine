@@ -65,9 +65,15 @@ target/
 
 nmagazine/secrets.json
 
+<<<<<<< HEAD
+*migrations/*
+
+nmagazine/media/*
+=======
 nmagazine/applications/almacen/asignacion/migrations/*
 nmagazine/applications/almacen/devolucion/migrations/*
 nmagazine/applications/almacen/entidad/migrations/*
 nmagazine/applications/almacen/recepcion/migrations/*
+>>>>>>> ce6e6117548352eac5e6b98035bfc338b5be1edb
 
 !__init__.py
