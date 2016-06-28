@@ -1,36 +1,46 @@
 {% load  staticfiles %}
 <!-- seccion de archivos Angularjs-->
-<script src="{% static 'js/angular.min.js' %}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-cookies.js"></script>
 <script src="{% static 'AngularApp/app.js' %}"></script>
 <script src="{% static 'AngularApp/app/guia/guideCtrl.js' %}"></script>
 <script src="{% static 'AngularApp/common/common.services.js' %}"></script>
 <script src="{% static 'AngularApp/common/services/guide/guideServis.js' %}"></script>
 
 <!-- Fin seccion de archivos Angularjs-->
-
-  <form name="GuideForm" >
-    Numero de Guia:<input type="text" ng-model="model.number" name="number" required >
+  <div ng-app="MagazineApp">
+    <div ng-controller="GuideCtrl as vm">
+<form role="form" method="POST" enctype="multipart/form-data">{% csrf_token %}
+    Numero de Guia:<input type="text" ng-model="vm.guide.number" name="number" required >
     <br>
-    Numero Interno:<input type="text" ng-model="model.invoce" name="invoce">
+    Numero Interno:<input type="text" ng-model="vm.guide.invoce" name="invoce">
     <br>
-    Proveedor:<input type="text" ng-model="model.provider" name="provider">
+    Proveedor:
+    <select ng-model="vm.guide.provider">
+        <option ng-repeat="p in vm.providers" value="{$p.pk$}">{$ p.name $}</option>
+    </select>
     <br>
-  </form>
 
-<div ng-app="MagazineApp">
-
-  <div ng-controller="GuideCtrl as vm">
-    <fieldset data-ng-repeat="choice in vm.choices">
-        <select>
-          <option ng-repeat="d in vm.diarios" value="{$d.name$}">{$ d.name $}</option>
-        </select>
-        <br>
-        Cantidad:<input type="text" ng-model="model.count" name="count">
-        <button name="remove" ng-show="$last" ng-click="vm.removeChoice()">--</button>
-    </fieldset>
-    <button class="addfields" ng-click="vm.addNewChoice()">Add fields</button>
-        <div id="choicesDisplay">
+          <fieldset data-ng-repeat="c in vm.cantidad">
+              <select ng-model="vm.prod.item[c.id]">
+                  <option ng-repeat="d in vm.diarios" value="{$d.pk$}">{$ d.magazine $}--{$ d.day $}</option>
+              </select>
+              <br>
+              Cantidad:<input type="number" name="count" ng-model="vm.count.item[c.id]" ng-value="0">
+              <button name="remove" ng-show="$last" ng-click="vm.removeChoice()">--</button>
+          </fieldset>
+          <button class="addfields" ng-click="vm.addNewChoice()">Add fields</button>
+          <div id="choicesDisplay">
             {$ choices $}
-        </div>
+          </div>
+
+      <br>
+      Afecto:<input type="checkbox" ng-model="vm.guide.afecto">
+      <br>
+      Descuento:<input type="number" ng-model="vm.guide.discount">%
+      <br>
+        <input type="submit" value="Enviar" ng-click="vm.enviar()">
+      </div>
+
+  </form>
   </div>
-</div>

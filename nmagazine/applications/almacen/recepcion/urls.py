@@ -1,10 +1,12 @@
 from django.conf.urls import url, include
 from . import views
+from .models import Guide
 from rest_framework import routers
-from .viewsets import MagazineViewSet
+from .viewsets import MagazineDayViewSet, GuideViewSet
 
 router = routers.SimpleRouter()
-router.register(r'magazine', MagazineViewSet)
+router.register(r'magazine', MagazineDayViewSet)
+router.register(r'save/guide', GuideViewSet, base_name=Guide)
 
 urlpatterns = [
     #url para applications

@@ -1,7 +1,15 @@
-from django.conf.urls import url
+from django.conf.urls import url, include
+from rest_framework import routers
 from . import views
 
+from .viewsets import ProviderViewSet
+
+router = routers.SimpleRouter()
+router.register(r'provider', ProviderViewSet)
+
 urlpatterns = [
+    #url para applications
+    url(r'^api/', include(router.urls)),
     url(
     #urls para Proveedor
         r'^almacen/entidad/proveedor/add/$',

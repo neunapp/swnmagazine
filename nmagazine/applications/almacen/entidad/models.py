@@ -35,7 +35,7 @@ class Provider(TimeStampedModel):
     )
 
     def __str__(self):
-        return self.name
+        return self.name+'-'+str(self.pk)
 
 
 class Vendor(TimeStampedModel):

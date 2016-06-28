@@ -92,6 +92,7 @@ class Guide(TimeStampedModel):
     """Guia de remision"""
     number = models.CharField(
         max_length=20,
+        unique=True,
     )
     date = models.DateField()
     number_invoce = models.CharField(
@@ -107,7 +108,7 @@ class Guide(TimeStampedModel):
         blank=True,
         null=True
     )
-    anulate = models.BooleanField(default=True)
+    anulate = models.BooleanField(default=False)
     user_created = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         related_name="guide_created",
@@ -148,7 +149,8 @@ class DetailGuide(TimeStampedModel):
     )
     dicount = models.DecimalField(
         max_digits=10,
-        decimal_places=3
+        decimal_places=3,
+        default=0,
     )
     missing = models.PositiveIntegerField(default=0)
     real_count = models.PositiveIntegerField(default=0)
