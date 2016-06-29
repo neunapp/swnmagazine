@@ -8,7 +8,14 @@ from datetime import datetime
 from applications.almacen.entidad.models import Provider
 
 from .models import Magazine, MagazineDay, Guide, DetailGuide
-from .serializers import MagazineDaySerializer, GuideSerializer
+from .serializers import MagazineDaySerializer, GuideSerializer, MagazineSerializer
+
+
+class MagazineViewSet(viewsets.ModelViewSet):
+    queryset = Magazine.objects.filter(
+        disable=False,
+    )
+    serializer_class = MagazineSerializer
 
 
 class MagazineDayViewSet(viewsets.ModelViewSet):

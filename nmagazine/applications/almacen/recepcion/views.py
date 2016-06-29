@@ -59,5 +59,86 @@ class MagazineCreate(CreateView):
         return super(MagazineCreate, self).form_valid(form)
 
 
+class MagazineUpdateView(UpdateView):
+    model = Magazine
+    form_class = MagazineForm
+    success_url = '/'
+    template_name = 'almacen/recepcion/magazine/update.html'
+
+    def get_initial(self):
+        day_ls = MagazineDay.objects.get(
+            magazine=self.get_object(),
+            day='0',
+        )
+        day_d = MagazineDay.objects.get(
+            magazine=self.get_object(),
+            day='1',
+        )
+
+        # recuperamos el objeto equipo
+        initial = super(MagazineUpdateView, self).get_initial()
+        initial['precio_tapa'] = day_ls.precio_tapa
+        initial['precio_guia'] = day_ls.precio_guia
+        initial['precio_venta'] = day_ls.precio_venta
+        initial['precio_tapad'] = day_d.precio_tapa
+        initial['precio_guiad'] = day_d.precio_guia
+        initial['precio_ventad'] = day_d.precio_venta
+        return initial
+
+    def form_valid(self, form):
+        #recuperamos los nuevos valores de formulario
+        precio_tapa = form.cleaned_data['precio_tapa']
+        precio_guia = form.cleaned_data['precio_guia']
+        precio_venta = form.cleaned_data['precio_venta']
+        precio_tapad = form.cleaned_data['precio_tapad']
+        precio_guiad = form.cleaned_data['precio_guiad']
+        precio_ventad = form.cleaned_data['precio_ventad']
+
+        #recuperamos DAY Lunes a Sabado
+        day_ls = MagazineDay.objects.get(
+            magazine=self.get_object(),
+            day='0',
+        )
+        #guardamos los nuevos datos
+        day_ls.precio_tapa = precio_tapa
+        day_ls.precio_guia = precio_guia
+        day_ls.precio_venta = precio_venta
+        day_ls.user_modified = self.request.user
+
+        #recuperamos day de domingo
+        day_d = MagazineDay.objects.get(
+            magazine=self.get_object(),
+            day='1',
+        )
+        #guardamos los nuevos datos
+        day_d.precio_tapa = precio_tapad
+        day_d.precio_guia = precio_guiad
+        day_d.precio_venta = precio_ventad
+        day_d.user_modified = self.request.user
+
+        day_ls.save()
+        day_d.save()
+        return super(MagazineUpdateView, self).form_valid(form)
+
+
+class MagazineDeleteView(DeleteView):
+    model = Magazine
+    success_url = '/'
+    template_name = template_name = 'almacen/recepcion/magazine/delete.html'
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.disable = True
+        self.object.user_modified = self.request.user
+        self.object.save()
+        success_url = self.get_success_url()
+
+        return HttpResponseRedirect(success_url)
+
+
+class MagazineListView(TemplateView):
+    template_name = 'almacen/recepcion/magazine/list.html'
+
+
 class GuideRegisterView(TemplateView):
     template_name = 'almacen/recepcion/guide/add.html'

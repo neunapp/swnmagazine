@@ -13,6 +13,23 @@ class ProdListField(serializers.ListField):
     child = serializers.CharField()
 
 
+class MagazineSerializer(serializers.ModelSerializer):
+    provider = serializers.CharField(source='provider.name')
+    tipo = serializers.SerializerMethodField()
+    class Meta:
+        model = Magazine
+        fields = (
+            'pk',
+            'name',
+            'tipo',
+            'provider',
+            'description',
+        )
+
+    def get_tipo(self,obj):
+        return obj.get_tipo_display()
+
+
 class MagazineDaySerializer(serializers.ModelSerializer):
     magazine = serializers.CharField(source='magazine.name')
     day = serializers.SerializerMethodField()

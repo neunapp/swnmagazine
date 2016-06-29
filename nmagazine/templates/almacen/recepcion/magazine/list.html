@@ -1,0 +1,73 @@
+{% load  staticfiles %}
+<!-- seccion de archivos Angularjs-->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-cookies.js"></script>
+
+<script src="{% static 'AngularApp/app.js' %}"></script>
+<script src="{% static 'AngularApp/app/guia/guideCtrl.js' %}"></script>
+<script src="{% static 'AngularApp/app/magazine/magazineCtrl.js' %}"></script>
+<script src="{% static 'AngularApp/common/common.services.js' %}"></script>
+<script src="{% static 'AngularApp/common/services/guide/guideServis.js' %}"></script>
+<style type="text/css">
+.gridStyle {
+    body { padding-top:50px; }
+}
+</style>
+
+
+<div class="container" ng-app="MagazineApp" ng-controller="MagazineCtrl as vm">
+  <a href="{% url 'recepcion_app:magazine-add' 0 %}">Agregar Diario</a>
+  <br>
+  <a href="{% url 'recepcion_app:magazine-add' 0 %}">Agregar Producto</a>
+  <br>
+  <form>
+    <div class="form-group">
+      <div>
+        <input type="text" placeholder="busccar..." ng-model="vm.buscar">
+      </div>
+    </div>
+  </form>
+
+  <table class="gridStyle">
+
+    <thead>
+      <tr>
+        <td>
+          <a href="#" ng-click="order_by = 'pk'; not_order = !not_order">
+            Codigo
+            <span ng-show="order_by == 'pk' && !not_order" </span>
+            <span ng-show="order_by == 'pk' && not_order"</span>
+          </a>
+        </td>
+        <td>
+          <a href="#" ng-click="order_by = 'provider'; not_order = !not_order">
+          Dias
+            <span ng-show="order_by == 'provider' && !not_order"</span>
+            <span ng-show="order_by == 'provider' && not_order"</span>
+          </a>
+        </td>
+        <td>
+          <a href="#" ng-click="order_by = 'name'; not_order = !not_order">
+          Diairio
+            <span ng-show="order_by == 'name' && !not_order" </span>
+            <span ng-show="order_by == 'name' && not_order" </span>
+          </a>
+        </td>
+        <td>
+          Accion
+        </td>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr ng-repeat="d in vm.diarios | orderBy:order_by:not_order | filter:vm.buscar">
+        <td>{$ d.pk $}</td>
+        <td>{$ d.provider $}</td>
+        <td>{$ d.name $}</td>
+        <td>
+          <a ng-href="/almacen/recepcion/Diario/update/{$ d.pk $}">Modificar</a>
+        </td>
+      </tr>
+    </tbody>
+
+  </table>
