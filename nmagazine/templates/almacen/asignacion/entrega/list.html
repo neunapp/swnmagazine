@@ -1,0 +1,56 @@
+{% extends "base/dashboardAlmacen.html" %}
+
+{% block title %} Consulta {% endblock title %}
+
+
+{% block main %}
+<div class="row">
+        <section class="widget">
+          <h3>Lista de Diarios y Productos por<span class="fw-semi-bold">Entregar</span></h3>
+          <br>
+          <div class="form-group">
+            <div class="input-group col-sm-4">
+                <input type="text" class="form-control" placeholder="Buscar..." ng-model="vm.buscar">
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Cantidad</th>
+                  <th>Fecha Recepcion</th>
+                  <th>Accion</th>
+                </tr>
+              </thead>
+              <tbody>
+                  {% for magazine in  magazin_list %}
+                    <tr>
+                      <td>
+                        {{magazine.magazine_day.magazine.name}} <span class="text-primary"><strong>{{magazine.magazine_day.get_day_display}}</strong></span>
+                     </td>
+                     <td>
+                       {{magazine.count}}
+                    </td>
+                    <td>
+                      {{magazine.guide.date}}
+                    </td>
+                    <td>
+                        {% if key == '1' %}
+                          <a href="{% url 'asignacion_app:entrega-add' 1 magazine.pk %}" class="btn btn-success"><i class="fa fa-sign-out"></i></a>
+                        {% else %}
+                          <a href="{% url 'asignacion_app:entrega-add' 0 magazine.pk %}" class="btn btn-primary"><i class="fa fa-sign-out"></i></a>
+                        {% endif %}
+
+                    </td>
+
+                      {% empty %}
+                          <td colspan="7">No hay Diarios o Productos por Entregar :( <a href="{% url 'recepcion_app:guide-add' %}">Agregar Nueva</a></td>
+                    </tr>
+                  {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </section>
+    </dvi>
+{% endblock main %}

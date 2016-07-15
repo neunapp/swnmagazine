@@ -2,10 +2,12 @@ from django.conf.urls import url, include
 from rest_framework import routers
 from . import views
 
-from .viewsets import ProviderViewSet
+from .viewsets import ProviderViewSet, VendorListViewSet, VendorAllListViewSet
 
 router = routers.SimpleRouter()
 router.register(r'provider', ProviderViewSet)
+router.register(r'vendor', VendorListViewSet)
+router.register(r'vendors', VendorAllListViewSet)
 
 urlpatterns = [
     #url para applications
@@ -27,8 +29,43 @@ urlpatterns = [
         name='provider-delete'
     ),
     url(
+        r'^almacen/entidad/proveedor/detail/(?P<pk>\d+)/$',
+        views.ProviderDetailView.as_view(),
+        name='provider-detail'
+    ),
+    url(
         r'^almacen/entidad/proveedor/lista/$',
         views.ProviderListView.as_view(),
         name='provider-list'
+    ),
+    url(
+    #urls para canillas
+        r'^almacen/entidad/canilla/lista/$',
+        views.VendorListView.as_view(),
+        name='vendor-list'
+    ),
+    url(
+    #urls para canillas
+        r'^almacen/entidad/canilla/add/$',
+        views.VendorCreateView.as_view(),
+        name='vendor-add'
+    ),
+    url(
+    #urls para canillas
+        r'^almacen/entidad/canilla/update/(?P<pk>\d+)/$',
+        views.VendorUpdateView.as_view(),
+        name='vendor-update'
+    ),
+    url(
+    #urls para canillas
+        r'^almacen/entidad/canilla/delete/(?P<pk>\d+)/$',
+        views.VendorDeleteView.as_view(),
+        name='vendor-delete'
+    ),
+    url(
+    #urls para canillas
+        r'^almacen/entidad/canilla/detail/(?P<pk>\d+)/$',
+        views.VendorDetailView.as_view(),
+        name='vendor-detail'
     ),
 ]

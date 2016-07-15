@@ -1,5 +1,7 @@
+# -*- encoding: utf-8 -*-
+
 from rest_framework import serializers
-from .models import Magazine, Guide, MagazineDay
+from .models import Magazine, Guide, MagazineDay, DetailGuide
 
 
 class CountListField(serializers.ListField):
@@ -57,3 +59,42 @@ class GuideSerializer(serializers.Serializer):
         required=False,
     )
     afecto = serializers.BooleanField()
+
+
+class GuideListSerializer(serializers.ModelSerializer):
+    provider = serializers.CharField(source='provider.name')
+    class Meta:
+        model = Guide
+        fields = (
+            'pk',
+            'number',
+            'date',
+            'number_invoce',
+            'provider',
+            'date_emission',
+            'date_retunr_cargo',
+            'created',
+        )
+
+
+class DetailGuideSerializer(serializers.ModelSerializer):
+    magazine_day = serializers.CharField(source='magazine_day.pk')
+    class Meta:
+        model = DetailGuide
+        fields = (
+            'pk',
+            'magazine_day',
+            'count',
+            'guide',
+        )
+
+
+class DGcreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DetailGuide
+        fields = (
+            'pk',
+            'magazine_day',
+            'count',
+            'guide',
+        )

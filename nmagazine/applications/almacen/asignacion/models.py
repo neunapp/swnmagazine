@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 from __future__ import unicode_literals
 
 from model_utils.models import TimeStampedModel
@@ -8,15 +9,13 @@ from django.conf import settings
 from django.db import models
 
 from applications.almacen.entidad.models import Vendor
-from applications.almacen.recepcion.models import MagazineDay
+from applications.almacen.recepcion.models import MagazineDay, DetailGuide
 
 # Create your models here.
 class Asignation(TimeStampedModel):
     """salida de Diario"""
-    vendor = models.ForeignKey(Vendor)
-    date = models.DateField(
-        default=datetime.datetime.today
-    )
+    detail_guide = models.ForeignKey(DetailGuide)
+    date = models.DateField()
     anulate = models.BooleanField(default=False)
     returned = models.BooleanField(default=False)
     user_created = models.ForeignKey(
@@ -33,17 +32,16 @@ class Asignation(TimeStampedModel):
     )
 
     def __str__(self):
-        return str(vendor)
+        return str(self.detail_guide)
 
 
 class DetailAsignation(TimeStampedModel):
     """Detalle de una salida"""
-    magazine_day = models.ForeignKey(MagazineDay)
+    vendor = models.ForeignKey(Vendor)
     asignation = models.ForeignKey(Asignation)
     count = models.PositiveIntegerField()
     retunr_count = models.PositiveIntegerField(
-        blank=True,
-        null=True
+        default=0
     )
     precio_venta = models.DecimalField(
         max_digits=10,
@@ -61,6 +59,7 @@ class DetailAsignation(TimeStampedModel):
         null=True,
         editable=False
     )
+    anulate = models.BooleanField(default=False)
 
     def __str__(self):
-        return str(MagazineDay)+'--'+str(asignation)
+        return str(self.vendor)+'--'+str(self.asignation)

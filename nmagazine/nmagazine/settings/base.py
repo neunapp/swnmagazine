@@ -31,6 +31,7 @@ LOCAL_APPS = (
     'applications.users',
     'applications.almacen.entidad',
     'applications.almacen.recepcion',
+    'applications.almacen.asignacion',
 )
 
 THIRD_PARTY_APPS = (

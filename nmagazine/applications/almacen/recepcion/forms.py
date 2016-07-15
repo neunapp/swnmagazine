@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 from django import forms
 
 from .models import Magazine, MagazineDay, Guide, DetailGuide
@@ -9,27 +10,69 @@ class MagazineForm(forms.ModelForm):
 
     precio_tapa = forms.DecimalField(
         max_digits=10,
-        decimal_places=3
+        decimal_places=3,
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': '0.0',
+                'size': '16',
+            }
+        )
     )
     precio_guia = forms.DecimalField(
         max_digits=10,
-        decimal_places=3
+        decimal_places=3,
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': '0.0',
+                'size': '16',
+            }
+        )
     )
     precio_venta = forms.DecimalField(
         max_digits=10,
-        decimal_places=3
+        decimal_places=3,
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': '0.0',
+                'size': '16',
+            }
+        )
     )
     precio_tapad = forms.DecimalField(
         max_digits=10,
-        decimal_places=3
+        decimal_places=3,
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': '0.0',
+                'size': '16',
+            }
+        )
     )
     precio_guiad = forms.DecimalField(
         max_digits=10,
-        decimal_places=3
+        decimal_places=3,
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': '0.0',
+                'size': '16',
+            }
+        )
     )
     precio_ventad = forms.DecimalField(
         max_digits=10,
-        decimal_places=3
+        decimal_places=3,
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': '0.0',
+                'size': '16',
+            }
+        )
     )
     class Meta:
         model = Magazine
@@ -42,16 +85,22 @@ class MagazineForm(forms.ModelForm):
         widgets = {
             'name': forms.TextInput(
                 attrs={
+                    'class': 'form-control',
                     'placeholder': 'Nombre',
                 }
             ),
             'description': forms.TextInput(
                 attrs={
+                    'class': 'form-control',
                     'placeholder': 'Descripcion',
                 }
             ),
+            'provider': forms.Select(
+                attrs={'class': 'form-control input-sm'}
+            ),
             'day_expiration': forms.TextInput(
                 attrs={
+                    'class': 'form-control',
                     'placeholder': 'Dias de Vencimiento',
                 }
             ),
@@ -116,3 +165,73 @@ class MagazineForm(forms.ModelForm):
             self.add_error('precio_ventad', msj)
         else:
             return precio_ventad
+
+
+class GuideForm(forms.ModelForm):
+
+    class Meta:
+        model =Guide
+        fields = (
+            'number_invoce',
+            'date_emission',
+            'provider',
+        )
+        widgets = {
+            'number_invoce': forms.TextInput(
+                attrs={
+                    'class': 'form-control',
+                    'size':'16',
+                    'placeholder': 'Nombre',
+                }
+            ),
+            'date_emission': forms.DateInput(
+                attrs={
+                    'type': 'date',
+                    'class': 'datepiker',
+                    'placeholder': 'Fecha',
+                }
+            ),
+            'provider': forms.Select(
+                attrs={
+                    'class': 'form-control',
+                }
+            ),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(GuideForm, self).__init__(*args, **kwargs)
+        self.fields['provider'].queryset = Provider.objects.filter(
+            disable=False
+        )
+
+    def clean_number_invoce(self):
+        number_invoce = self.cleaned_data['number_invoce']
+        if not number_invoce.isdigit() or number_invoce < 0:
+            msj = 'Solo deben contener numeros'
+            self.add_error('number_invoce', msj)
+        else:
+            return number_invoce
+
+
+class DetailGuideForm(forms.ModelForm):
+
+    class Meta:
+        model = DetailGuide
+        fields = (
+            'magazine_day',
+            'count',
+        )
+
+    def __init__(self, *args, **kwargs):
+        super(DetailGuideForm, self).__init__(*args, **kwargs)
+        self.fields['magazine_day'].queryset = MagazineDay.objects.filter(
+            magazine__disable=False
+        )
+
+    def clean_count(self):
+        count = self.cleaned_data['count']
+        if count < 0:
+            msj = 'Ingrese un numero valido'
+            self.add_error('count', msj)
+        else:
+            return count

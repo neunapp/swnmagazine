@@ -1,0 +1,3 @@
+nombre de repositorio: nmagazine.git
+nombre del entorno: swnmagazine
+nombre dle proyecto: nmagazine

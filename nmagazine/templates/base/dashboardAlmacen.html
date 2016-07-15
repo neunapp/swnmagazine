@@ -1,0 +1,89 @@
+{% extends "base/base_profiles.html" %}
+{% block title %}  Max Cargo S.A.C {% endblock title %}
+
+        {% block rightmenu %}
+        <!-- main notification links are placed inside of .sidebar-nav -->
+        <ul class="sidebar-nav">
+            <li class="active">
+                <!-- an example of nested submenu. basic bootstrap collapse component -->
+                <a href="#sidebar-dashboard" data-toggle="collapse" data-parent="#sidebar">
+                    <span class="icon">
+                        <i class="fa fa-database"></i>
+                    </span>
+                    Reistros
+                    <i class="toggle fa fa-angle-down"></i>
+                </a>
+                <ul id="sidebar-dashboard" class="collapse">
+                    <li><a href="{% url 'entidad_app:vendor-list' %}">Canillas</a></li>
+                    <li><a href="{% url 'entidad_app:provider-list' %}">Proveedores</a></li>
+                    <li><a href="{% url 'recepcion_app:magazine-list' %}" class="action-link">Diarios y Productos</a></li>
+                </ul>
+            </li>
+        </ul>
+        <!-- every .sidebar-nav may have a title -->
+        <h5 class="sidebar-nav-title">Procesos <a class="action-link" href="#"><i class="glyphicon glyphicon-refresh"></i></a></h5>
+        <ul class="sidebar-nav">
+            <li>
+                <!-- an example of nested submenu. basic bootstrap collapse component -->
+                <a class="collapsed" href="#sidebar-forms" data-toggle="collapse" data-parent="#sidebar">
+                    <span class="icon">
+                        <i class="fa fa-download"></i>
+                    </span>
+                    Recibir
+                    <i class="toggle fa fa-angle-down"></i>
+                </a>
+                <ul id="sidebar-forms" class="collapse">
+                    <li><a href="{% url 'recepcion_app:guide-add' %}">Registrar</a></li>
+                    <li><a href="{% url 'recepcion_app:guide-list' %}">Consultar</a></li>
+                </ul>
+            </li>
+            <li>
+                <a class="collapsed" href="#sidebar-ui" data-toggle="collapse" data-parent="#sidebar">
+                    <span class="icon">
+                        <i class="fa fa-sign-in"></i>
+                    </span>
+                    Entregar
+                    <i class="fa fa-angle-sign-in"></i>
+                </a>
+                <ul id="sidebar-ui" class="collapse">
+                  <li><a href="{% url 'asignacion_app:entrega-list' 0 %}">Pauta Multiple</a></li>
+                    <li><a href="{% url 'asignacion_app:entrega-list' 0 %}">Pauta Unica</a></li>
+                    <li><a href="{% url 'asignacion_app:entrega-list' 1 %}">Registrar Entrega</a></li>
+                    <li><a href="{% url 'asignacion_app:entrega-list-consulta' %}">Consultas</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="grid.html">
+                    <span class="icon">
+                        <i class="fa fa-plane"></i>
+                    </span>
+                    Devovler
+                </a>
+            </li>
+            <li>
+                <a class="collapsed" href="#" data-toggle="collapse" data-parent="#sidebar">
+                    <span class="icon">
+                        <i class="fa fa-calculator"></i>
+                    </span>
+                    Liquidar
+                    <i class="toggle fa fa-angle-down"></i>
+                </a>
+            </li>
+        </ul>
+        <h5 class="sidebar-nav-title">Reeportes <a class="action-link" href="#"><i class="fa fa-area-chart"></i></a></h5>
+        <ul class="sidebar-nav">
+            <li>
+                <!-- an example of nested submenu. basic bootstrap collapse component -->
+                <a class="collapsed" href="#" data-toggle="collapse" data-parent="#sidebar">
+                    <span class="icon">
+                        <i class="fa fa-area-chart"></i>
+                    </span>
+                    Guia Remision
+                    <i class="toggle fa fa-angle-down"></i>
+                </a>
+            </li>
+        </ul>
+{% endblock rightmenu %}
+
+{% block main %}
+{% endblock main %}

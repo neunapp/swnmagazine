@@ -1,3 +1,4 @@
+# -*- encoding: utf-8 -*-
 from __future__ import unicode_literals
 from model_utils.models import TimeStampedModel
 
@@ -66,7 +67,7 @@ class Vendor(TimeStampedModel):
         decimal_places=5
     )
     disable = models.BooleanField(
-        default=True
+        default=False
     )
     user_created = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -80,6 +81,7 @@ class Vendor(TimeStampedModel):
         null=True,
         editable=False
     )
+    anulate = models.BooleanField(default=False)
 
     def __str__(self):
         return (self.dni+'-'+self.name)

@@ -1,6 +1,9 @@
 (function(){
     var app = angular.module("MagazineApp",
-                                      ["common.services",'ngCookies'])
+                                  ['ngCookies','ngToast','ui.router',
+                                  'ui.grid','ui.grid.edit', 'ui.grid.cellNav',
+                                  'ui.grid.selection', 'ui.grid.exporter',
+                                  'common.services'])
         .config(
         function($interpolateProvider, $httpProvider) {
         $interpolateProvider.startSymbol('{$');

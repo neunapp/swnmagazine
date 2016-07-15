@@ -8,11 +8,12 @@ from django.views.generic import (
     DetailView,
     DeleteView,
     ListView,
+    TemplateView,
     View,
 )
 
-from .models import Provider
-from .forms import ProviderForm
+from .models import Provider, Vendor
+from .forms import ProviderForm, VendorForm
 
 # Create your views here.
 class ProviderCreateView(CreateView):
@@ -45,6 +46,11 @@ class ProviderUpdateView(UpdateView):
         return super(ProviderUpdateView, self).form_valid(form)
 
 
+class ProviderDetailView(DetailView):
+    model = Provider
+    template_name = 'almacen/entidad/proveedor/detail.html'
+
+
 class ProviderDeleteView(DeleteView):
     model = Provider
     success_url = success_url = reverse_lazy('entidad_app:provider-list')
@@ -66,3 +72,64 @@ class ProviderListView(ListView):
 
     def get_queryset(self):
         return Provider.objects.filter(disable=False)
+
+
+class VendorListView(TemplateView):
+    template_name = 'almacen/entidad/vendor/list.html'
+
+
+class VendorCreateView(CreateView):
+    '''registrar un proveedor'''
+    form_class = VendorForm
+    success_url = success_url = reverse_lazy('entidad_app:vendor-list')
+    template_name = 'almacen/entidad/vendor/add.html'
+
+    def form_valid(self, form):
+        vendor = form.save(commit=False)
+        vendor.user_created = self.request.user
+        vendor.save()
+
+        return super(VendorCreateView, self).form_valid(form)
+
+class VendorUpdateView(UpdateView):
+    '''modificar vendor'''
+    model = Vendor
+    form_class = VendorForm
+    success_url = reverse_lazy('entidad_app:vendor-list')
+    template_name = 'almacen/entidad/vendor/update.html'
+
+    def form_valid(self, form):
+        form.save()
+        canilla = self.get_object()
+        canilla.user_modified = self.request.user
+        canilla.save()
+
+        return super(VendorUpdateView, self).form_valid(form)
+
+
+class VendorDetailView(DetailView):
+    model = Vendor
+    template_name = 'almacen/entidad/vendor/detail.html'
+
+
+class VendorDeleteView(DeleteView):
+    model = Vendor
+    success_url = success_url = reverse_lazy('entidad_app:vendor-list')
+    template_name = 'almacen/entidad/vendor/delete.html'
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.disable = True
+        self.object.user_modified = self.request.user
+        self.object.save()
+        success_url = self.get_success_url()
+
+        return HttpResponseRedirect(success_url)
+
+
+class LoginTemplateView(TemplateView):
+    template_name = 'users/login/login.html'
+
+
+class HomeTemplateView(TemplateView):
+    template_name = 'base/dashboardAlmacen.html'

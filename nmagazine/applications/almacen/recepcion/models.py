@@ -1,6 +1,8 @@
+# -*- encoding: utf-8 -*-
 from __future__ import unicode_literals
 
 from model_utils.models import TimeStampedModel
+from django.utils import timezone
 
 from datetime import datetime
 
@@ -126,6 +128,33 @@ class Guide(TimeStampedModel):
         return self.number+'--'+str(self.date)
 
 
+class DetailGuideManager(models.Manager):
+    def magazine_no_expired(self):
+        #recuperamos la fecha de hoy
+        hoy = timezone.now().date()
+        #lista de no vencidos
+        no_expired = self.filter(
+            guide__anulate=False,
+            anulate=False,
+            culmined=False,
+        )
+        #inicializamos lista resultado
+        resultado = []
+        for dg in no_expired:
+            #calculamos los dias de registro
+            diasregsitro = hoy - dg.guide.date
+            dias_registro = int(diasregsitro.days)
+            if dias_registro > dg.magazine_day.magazine.day_expiration:
+                #producto vencido
+                dg.culmined = True
+                dg.save()
+            else:
+                resultado.append(dg)
+
+        return resultado
+
+
+
 class DetailGuide(TimeStampedModel):
     """guia detalle"""
     magazine_day = models.ForeignKey(MagazineDay)
@@ -167,6 +196,10 @@ class DetailGuide(TimeStampedModel):
         null=True,
         editable=False
     )
+    anulate = models.BooleanField(default=False)
+    culmined = models.BooleanField(default=False)
+
+    objects = DetailGuideManager()
 
     def __str__(self):
-        return str(self.magazine_day)+'--'+str(self.guide)
+        return str(self.pk)+'--'+str(self.magazine_day)+'--'+str(self.guide)

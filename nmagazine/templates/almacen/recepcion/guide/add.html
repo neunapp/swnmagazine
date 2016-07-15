@@ -1,46 +1,134 @@
-{% load  staticfiles %}
-<!-- seccion de archivos Angularjs-->
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular-cookies.js"></script>
-<script src="{% static 'AngularApp/app.js' %}"></script>
-<script src="{% static 'AngularApp/app/guia/guideCtrl.js' %}"></script>
-<script src="{% static 'AngularApp/common/common.services.js' %}"></script>
-<script src="{% static 'AngularApp/common/services/guide/guideServis.js' %}"></script>
+{% extends "base/dashboardAlmacen.html" %}
 
-<!-- Fin seccion de archivos Angularjs-->
-  <div ng-app="MagazineApp">
-    <div ng-controller="GuideCtrl as vm">
-<form role="form" method="POST" enctype="multipart/form-data">{% csrf_token %}
-    Numero de Guia:<input type="text" ng-model="vm.guide.number" name="number" required >
-    <br>
-    Numero Interno:<input type="text" ng-model="vm.guide.invoce" name="invoce">
-    <br>
-    Proveedor:
-    <select ng-model="vm.guide.provider">
-        <option ng-repeat="p in vm.providers" value="{$p.pk$}">{$ p.name $}</option>
-    </select>
-    <br>
+{% block title %} Asignacion Nueva {% endblock title %}
 
-          <fieldset data-ng-repeat="c in vm.cantidad">
-              <select ng-model="vm.prod.item[c.id]">
-                  <option ng-repeat="d in vm.diarios" value="{$d.pk$}">{$ d.magazine $}--{$ d.day $}</option>
-              </select>
-              <br>
-              Cantidad:<input type="number" name="count" ng-model="vm.count.item[c.id]" ng-value="0">
-              <button name="remove" ng-show="$last" ng-click="vm.removeChoice()">--</button>
-          </fieldset>
-          <button class="addfields" ng-click="vm.addNewChoice()">Add fields</button>
-          <div id="choicesDisplay">
-            {$ choices $}
-          </div>
 
-      <br>
-      Afecto:<input type="checkbox" ng-model="vm.guide.afecto">
-      <br>
-      Descuento:<input type="number" ng-model="vm.guide.discount">%
-      <br>
-        <input type="submit" value="Enviar" ng-click="vm.enviar()">
-      </div>
+{% block main %}
+<div ng-app="MagazineApp" ng-controller="GuideCtrl as vm">
+<h2 class="col-sm-offset-2 page-title">Guia de Remision</h2>
+<h3> <toast></toast></h3>
+<form name="formGuia" class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">{% csrf_token %}
+<div class="col-sm-offset-2 col-md-8">
+    <section class="widget">
+        <header>
+            <div class="widget-controls">
+                <a href="."><i class="fa fa-refresh"></i></a>
+            </div>
+        </header>
+        <div class="widget-body">
+                <fieldset>
+                    <legend><strong>Datos Guia</strong></legend>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="number">Numero de Guia: </label>
+                        <div class="col-sm-7">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-barcode"></i></span>
+                                <input id="number" name="number" class="form-control"
+                                  size="16" type="text" placeholder="Numero de Guia"
+                                  ng-model="vm.guide.number"
 
-  </form>
-  </div>
+                                  ng-class="{ 'error' : formGuia.number.$invalid && !formGuia.number.$pristine }" required>
+                                  <span ng-show="formGuia.number.$invalid && !formGuia.number.$pristine" class="text-danger">Este Campo es Requerido</span>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="invoce">Numero de Interno: </label>
+                        <div class="col-sm-7">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-list-alt"></i></span>
+                                <input id="invoce" name="invoce" class="form-control" size="16" type="number"
+                                    placeholder="Numero interno" ng-model="vm.guide.invoce" min="0"
+                                    ng-class="{ 'error' : formGuia.invoce.$invalid && !formGuia.invoce.$pristine }"
+                                >
+                                <span ng-show="formGuia.invoce.$invalid && !formGuia.invoce.$pristine" class="text-danger">El Numero no es Correcto</span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="provider">
+                            Proveedor:
+                        </label>
+                        <div class="col-sm-7">
+                            <select id="provide" name="provider" class="selectpicker" ng-model="vm.guide.provider" required
+                                ng-class="{ 'error' : formGuia.provider.$invalid && !formGuia.provider.$pristine }"
+                            >
+                                <option ng-repeat="p in vm.providers" value="{$p.pk$}">{$ p.name $}</option>
+                            </select>
+                            <span ng-show="formGuia.provider.$invalid && !formGuia.provider.$pristine" class="text-danger">Seleccione un Proveedor</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="discount">Descuento: </label>
+                        <div class="col-sm-7">
+                            <div class="input-group">
+                                <span class="input-group-addon">%</span>
+                                <input id="discount" name="discount" class="form-control" size="16" type="number"
+                                    placeholder="Descuento" ng-model="vm.guide.discount" value="0" min="0"
+                                    ng-class="{ 'error' : formGuia.discount.$invalid && !formGuia.discount.$pristine }"
+                                >
+                                <span ng-show="formGuia.discount.$invalid && !formGuia.discount.$pristine" class="text-danger">El Descuento no puede ser negativo</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-offset-4 col-sm-4 checkbox checkbox-primary">
+                        <input id="checkbox2" type="checkbox" ng-model="vm.guide.afecto">
+                        <label for="checkbox2">
+                            Afecto
+                        </label>
+                    </div>
+                    <br>
+                    <legend><strong>Datos Productos</strong></legend>
+                    </fieldset>
+                    <fieldset data-ng-repeat="c in vm.cantidad">
+                      <div class="table-responsive">
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              <th>Diario/Producto</th>
+                              <th>Cantidad</th>
+                              <th></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                              <td>
+                                <select class="selectpicker" ng-model="vm.prod.item[c.id]" required ng-change="vm.validations(formGuia.$valid)">
+                                  <option ng-repeat="d in vm.diarios" value="{$d.pk$}">{$ d.magazine $}--{$ d.day $}</option>
+                                </select>
+                                <span ng-show="vm.valid0" class="text-danger">Seleccione un diario</span>
+                              </td>
+                              <td>
+                                <input class="form-control" name="cantidad" size="16" type="number"
+                                    placeholder="Cantidad" ng-model="vm.count.item[c.id]"
+                                    ng-value="0" min="1" required
+                                    ng-class="{ 'error' : vm.valid1 }"
+                                    ng-change="vm.validations(formGuia.$valid)"
+                                >
+                                <span ng-show="vm.valid1" class="text-danger">Ingrese una Cantidad Positiva</span>
+
+                              </td>
+                              <td>
+                                <button type="button" class="btn btn-success" ng-show="$last" ng-click="vm.addNewChoice()"><i class="fa fa-plus"></i></button>
+                                <button type="button" class="btn btn-danger" ng-click="vm.removeChoice()"><i class="fa fa-minus"></i></button>
+                              </td>
+                          </tbody>
+                        </table>
+                      </div>
+                    </fieldset>
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-sm-offset-5 col-sm-7">
+                          <button type="submit" class="btn btn-primary" ng-disabled="vm.check" ng-click="vm.enviar()">Guardar</button>
+                          <span ng-show="vm.check" class="text-danger">Corrija los datos</span>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </section>
+</div>
+</form>
+</div>
+{% endblock main %}
