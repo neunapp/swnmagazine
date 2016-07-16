@@ -1,4 +1,4 @@
 nombre de repositorio: nmagazine.git
 nombre del entorno: swnmagazine
 nombre dle proyecto: nmagazine
-ip:198.199.74.85
+ip digital ocean:198.199.74.85
