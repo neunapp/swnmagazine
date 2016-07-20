@@ -132,7 +132,7 @@ def generar_pauta_dinamica():
             #verificamos si existen datos
             if consulta.exists():
                 p.count.append(consulta[0].count)
-                p.product.append(consulta[0].asignation.detail_guide.magazine_day)
+                p.product.append(consulta[0].asignation.detail_guide.magazine_day.magazine)
             else:
                 p.count.append(0)
                 p.product.append(dg.magazine_day.magazine)
