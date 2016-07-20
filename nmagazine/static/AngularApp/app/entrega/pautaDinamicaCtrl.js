@@ -3,8 +3,6 @@
     angular.module("MagazineApp")
         .controller("PautaDinamicaCtrl",  ['$http','uiGridConstants','ngToast', PautaDinamicaCtrl]);
 
-    //MagazineCtrl.$inject = ["NgTableParams"];
-
     function PautaDinamicaCtrl($http,uiGridConstants,ngToast){
       var vm = this;
 
