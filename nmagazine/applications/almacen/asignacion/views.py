@@ -54,3 +54,7 @@ class ListaConsultaView(TemplateView):
 class DetailConsultaView(DetailView):
     model = Asignation
     template_name = 'almacen/asignacion/consulta/view.html'
+
+
+class PautaDinamicaView(TemplateView):
+    template_name = 'almacen/asignacion/entrega/pauta-dinamica.html'

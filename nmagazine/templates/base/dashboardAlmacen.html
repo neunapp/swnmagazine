@@ -10,7 +10,7 @@
                     <span class="icon">
                         <i class="fa fa-database"></i>
                     </span>
-                    Reistros
+                    CATALOGOS
                     <i class="toggle fa fa-angle-down"></i>
                 </a>
                 <ul id="sidebar-dashboard" class="collapse">
@@ -46,14 +46,14 @@
                     <i class="fa fa-angle-sign-in"></i>
                 </a>
                 <ul id="sidebar-ui" class="collapse">
-                  <li><a href="{% url 'asignacion_app:entrega-list' 0 %}">Pauta Multiple</a></li>
+                  <li><a href="{% url 'asignacion_app:entrada-pauta_dinamica' %}">Pauta Multiple</a></li>
                     <li><a href="{% url 'asignacion_app:entrega-list' 0 %}">Pauta Unica</a></li>
                     <li><a href="{% url 'asignacion_app:entrega-list' 1 %}">Registrar Entrega</a></li>
                     <li><a href="{% url 'asignacion_app:entrega-list-consulta' %}">Consultas</a></li>
                 </ul>
             </li>
             <li>
-                <a href="grid.html">
+                <a href="#">
                     <span class="icon">
                         <i class="fa fa-plane"></i>
                     </span>
@@ -74,11 +74,11 @@
         <ul class="sidebar-nav">
             <li>
                 <!-- an example of nested submenu. basic bootstrap collapse component -->
-                <a class="collapsed" href="#" data-toggle="collapse" data-parent="#sidebar">
+                <a href="{% url 'recepcion_app:guide-kardex' %}">
                     <span class="icon">
                         <i class="fa fa-area-chart"></i>
                     </span>
-                    Guia Remision
+                    Kardex
                     <i class="toggle fa fa-angle-down"></i>
                 </a>
             </li>

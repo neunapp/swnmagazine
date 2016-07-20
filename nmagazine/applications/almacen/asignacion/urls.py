@@ -41,6 +41,11 @@ urlpatterns = [
         name='pautas-dinamica'
     ),
     url(
+        r'^almacen/entrada/pautas/dinamica/generar/$',
+        views.PautaDinamicaView.as_view(),
+        name='entrada-pauta_dinamica'
+    ),
+    url(
         r'^api/asignacion/save/(?P<pk>[-\w]+)/$',
         viewsets.DACreateViewSet.as_view({'post': 'create'}),
         name='asignacion'

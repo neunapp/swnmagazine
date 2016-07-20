@@ -90,4 +90,10 @@ urlpatterns = [
         views.DetailGuideDeleteView.as_view(),
         name='detail_guide-delete'
     ),
+    #urls para reportes
+    url(
+        r'^almacen/recepcion/guide/report/kardex/$',
+        views.KardexTemplateView.as_view(),
+        name='guide-kardex'
+    ),
 ]

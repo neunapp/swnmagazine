@@ -14,7 +14,7 @@ from .serializers import (
     AsignationListSerializer,
     ConsultaSerializer,
 )
-from .functions import generar_pauta, genrar_pauta_dinamica, generar_consulta
+from .functions import generar_pauta, generar_pauta_dinamica, generar_consulta
 
 from applications.almacen.recepcion.models import DetailGuide
 from applications.almacen.entidad.models import Vendor
@@ -32,9 +32,7 @@ class GenerarPautaDinamica(viewsets.ModelViewSet):
     serializer_class =  PuataDinamicaSerializer
 
     def get_queryset(self):
-        lista = DetailGuide.objects.magazine_no_expired()
-        data = genrar_pauta_dinamica(lista)
-        return data
+        return generar_pauta_dinamica()
 
 
 class AsignationListViewSet(viewsets.ModelViewSet):

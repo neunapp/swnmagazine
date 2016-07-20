@@ -262,3 +262,7 @@ class DetailGuideDeleteView(DeleteView):
                 kwargs={'pk': guide.pk },
             )
         )
+
+
+class KardexTemplateView(TemplateView):
+    template_name = 'almacen/recepcion/reporte/kardex.html'

@@ -27,6 +27,7 @@ class PautaMultiple():
     count = []
     product = []
 
+
 #funcion qeu devuelve lista de pautas de entrega
 def generar_pauta(pk):
     #recuperamos el producto dia
@@ -61,6 +62,7 @@ def generar_pauta(pk):
             resultado.append(pauta)
 
     return resultado
+
 
 
 def generar_consulta(pk):
@@ -100,13 +102,16 @@ def generar_consulta(pk):
     return resultado
 
 
-def genrar_pauta_dinamica(lista):
+
+def generar_pauta_dinamica():
     # recuepramos lista de canillas
     canillas = Vendor.objects.filter(
         anulate=False,
         disable=False,
     )
-    # agregamos arreglo resultado
+    #recuperamos la lista de diarios
+    lista = DetailGuide.objects.magazine_no_expired()
+    # creamos arreglo resultado
     resultado = []
     #iteramos la lista de canillas
     for c in canillas:
@@ -114,23 +119,21 @@ def genrar_pauta_dinamica(lista):
         p = PautaMultiple()
         p.pk = c.pk
         p.name = c.name
-        #verificamos la las cantidad por diario
+        p.count =[]
+        p.product =[]
+        #asignamos cantidad por diario
         for dg in lista:
-            print '----primer detalle guia----'
-            print dg
-            #recuperaos ultima asigancion
+        #recuperaos ultima asigancion
             consulta = DetailAsignation.objects.filter(
-                asignation__vendor=c,
-                magazine__magazine_day=dg.magazine_day,
+                vendor=c,
+                asignation__detail_guide__magazine_day=dg.magazine_day,
                 anulate=False,
             ).order_by('created')
             #verificamos si existen datos
             if consulta.exists():
-                print 'si existe la consulta'
                 p.count.append(consulta[0].count)
-                p.product.append(consulta[0].magazine)
+                p.product.append(consulta[0].asignation.detail_guide.magazine_day)
             else:
-                print 'no existe la cosulta'
                 p.count.append(0)
                 p.product.append(dg.magazine_day.magazine)
 
