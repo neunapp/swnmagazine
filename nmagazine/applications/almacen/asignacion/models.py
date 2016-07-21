@@ -60,6 +60,7 @@ class DetailAsignation(TimeStampedModel):
         editable=False
     )
     anulate = models.BooleanField(default=False)
+    culmined = models.BooleanField(default=False)
 
     def __str__(self):
         return str(self.vendor)+'--'+str(self.asignation)

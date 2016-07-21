@@ -9,6 +9,8 @@
       var vm = this;
 
       vm.gridOptions = {
+        infiniteScrollRowsFromEnd: 40,
+        infiniteScrollUp: true
         columnDefs : [
           {
             name: 'pk',

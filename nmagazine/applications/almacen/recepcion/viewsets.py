@@ -65,8 +65,6 @@ class GuideViewSet(viewsets.ViewSet):
                 #reuperamos datos de MagazinesDay
                 counts = serializado.validated_data['counts']
                 prods = serializado.validated_data['prods']
-                discount = serializado.validated_data['discount']
-                afecto = serializado.validated_data['afecto']
 
                 for p,c in zip(prods,counts):
                     magazine_day = MagazineDay.objects.get(
@@ -80,8 +78,6 @@ class GuideViewSet(viewsets.ViewSet):
                         precio_tapa=magazine_day.precio_tapa,
                         precio_guia=magazine_day.precio_guia,
                         precio_sunat=magazine_day.precio_guia,
-                        dicount=discount,
-                        afecto=afecto,
                         user_created=self.request.user,
                     )
                     guide_detail.save()

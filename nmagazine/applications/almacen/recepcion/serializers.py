@@ -53,12 +53,6 @@ class GuideSerializer(serializers.Serializer):
     provider = serializers.CharField()
     counts = CountListField()
     prods = ProdListField()
-    discount = serializers.DecimalField(
-        max_digits=7,
-        decimal_places=3,
-        required=False,
-    )
-    afecto = serializers.BooleanField()
 
 
 class GuideListSerializer(serializers.ModelSerializer):

@@ -11,6 +11,9 @@
       //inicialiamos nuestra tabla
       vm.columns = [{ field: 'Codigo',enableCellEdit: false,enableColumnMenu: false }, { field: 'Nombres', enableCellEdit: false,enableColumnMenu: false}];
       vm.gridOptions = {
+        infiniteScrollRowsFromEnd: 40,
+        infiniteScrollUp: true,
+
         enableSorting: true,
         columnDefs: vm.columns,
         enableGridMenu: true,

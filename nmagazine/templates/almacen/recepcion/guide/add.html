@@ -60,26 +60,6 @@
                             <span ng-show="formGuia.provider.$invalid && !formGuia.provider.$pristine" class="text-danger">Seleccione un Proveedor</span>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label" for="discount">Descuento: </label>
-                        <div class="col-sm-7">
-                            <div class="input-group">
-                                <span class="input-group-addon">%</span>
-                                <input id="discount" name="discount" class="form-control" size="16" type="number"
-                                    placeholder="Descuento" ng-model="vm.guide.discount" value="0" min="0"
-                                    ng-class="{ 'error' : formGuia.discount.$invalid && !formGuia.discount.$pristine }"
-                                >
-                                <span ng-show="formGuia.discount.$invalid && !formGuia.discount.$pristine" class="text-danger">El Descuento no puede ser negativo</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-offset-4 col-sm-4 checkbox checkbox-primary">
-                        <input id="checkbox2" type="checkbox" ng-model="vm.guide.afecto">
-                        <label for="checkbox2">
-                            Afecto
-                        </label>
-                    </div>
                     <br>
                     <legend><strong>Datos Productos</strong></legend>
                     </fieldset>

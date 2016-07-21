@@ -11,8 +11,6 @@
 
         //inicializamos json Guia
         vm.guide = {};
-        vm.guide.afecto = false;
-        vm.guide.discount = 0;
 
 
         //inicializamos la lista de proveedores
@@ -68,12 +66,6 @@
             vm.guide.counts = counts_magazines;
             vm.guide.prods = prod_magazines;
             //validamos descuento
-            if (vm.guide.discount == null) {
-              vm.guide.discount = 0;
-            }
-            if (vm.guide.afecto == null) {
-              vm.guide.afecto = false;
-            }
             if (vm.guide.invoce ==null) {
               vm.guide.invoce=0;
             }
