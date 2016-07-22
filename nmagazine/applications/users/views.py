@@ -38,6 +38,15 @@ class LogIn(FormView):
                         'users_app:home-almacen'
                     )
                 )
+
+            elif user.is_active and user.type_user == '2':
+                login(self.request, user)
+                return HttpResponseRedirect(
+                    reverse(
+                        'users_app:home-caja'
+                    )
+                )
+
             elif user.is_active:
                 # si el usuario es activo ira dahboard
                 login(self.request, user)
@@ -64,5 +73,9 @@ class LogoutView(View):
             )
         )
 
-class HomeTemplateView(TemplateView):
+class AlmacenTemplateView(TemplateView):
     template_name = 'base/dashboardAlmacen.html'
+
+
+class CajaTemplateView(TemplateView):
+    template_name = 'caja/panel.html'

@@ -1,0 +1,81 @@
+{% extends "base/dashboardCaja.html" %}
+
+{% block title %} Cobrar {% endblock title %}
+
+
+{% block main %}
+<div class="row" ng-app="MagazineApp" ng-controller="CobrosCtrl as vm">
+<div class="col-md-12">
+    <section class="widget">
+        <div class="widget-body">
+            <form role="form">
+                <fieldset>
+                    <legend>Codigo Vendedor</legend>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="bar" placeholder="codigo de vendedor">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="alert alert-success alert-sm">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                        <span class="fw-semi-bold">Vendedor:</span> Carlos Ampuero Neunapp 102
+                    </div>
+                </fieldset>
+                <section class="widget">
+                     <div id="grid1" ui-grid="vm.gridOptions" ui-grid-edit ui-grid-cellnav ui-grid-exporter class="grid"></div>
+                </section>
+            </form>
+        </div>
+    </section>
+
+            <div class="row">
+                <div class="col-sm-6">
+                    <section class="widget no-padding text-align-center">
+                        <div class="row no-margin">
+                            <div class="col-xs-6 bg-success btlr bblr">
+                                <p class="value1 text-white mt-sm mr-n-xs mb-n-xs">
+                                    S/. 200.000
+                                </p>
+                                <p class="text-white display-inline-block fw-normal display-inline-block mb">Por Cobrar</p>
+                            </div>
+
+                            <div class="col-sm-offset-1 col-xs-5 bg-danger btlr bblr">
+                                <p class="value1 text-white mt-sm mr-n-xs mb-n-xs">
+                                    S/. 550.500
+                                </p>
+                                <p class="text-white display-inline-block fw-normal display-inline-block mb">Deuda</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-sm-6">
+                      <section class="widget">
+                          <div class="widget-body">
+                              <p class="text-align-center">
+                                <br>
+                                  <button class="btn btn-inverse" role="button">
+                                      Guardar e Imprimir
+                                  </button>
+                                  <button class="btn btn-grey" role="button">
+                                      Guardar
+                                  </button>
+
+                                  <button class="btn btn-default" role="button">
+                                      Cancelar
+                                  </button>
+                              </p>
+                          </div>
+                      </section>
+                </div>
+            </div>
+</div>
+</div>
+{% endblock main %}

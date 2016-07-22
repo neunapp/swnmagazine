@@ -19,7 +19,7 @@
 
       vm.gridOptions = {
         infiniteScrollRowsFromEnd: 40,
-        infiniteScrollUp: true
+        infiniteScrollUp: true,
         columnDefs : [
           {
             name: 'pk',

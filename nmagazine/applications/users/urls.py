@@ -14,7 +14,12 @@ urlpatterns = [
     ),
     url(
         r'^panel/$',
-        views.HomeTemplateView.as_view(),
+        views.AlmacenTemplateView.as_view(),
         name='home-almacen'
+    ),
+    url(
+        r'^panel/caja/$',
+        views.CajaTemplateView.as_view(),
+        name='home-caja'
     ),
 ]

@@ -1,0 +1,51 @@
+{% extends "base/dashboardCaja.html" %}
+
+{% block title %} Cuadrar Caja {% endblock title %}
+
+
+{% block main %}
+<div class="row">
+
+  <legend>Lista de Vendedores Faltantes hoy</legend>
+  <div class="col-md-12 widget-container">
+      <section class="widget" id="news-widget" data-widgster-load="demo/ajax/widgets/news.php">
+          <header>
+              <h3>
+                  Alberto Cordoba <span class="badge bg-success">S./ 68.520</span>
+              </h3>
+              <span class="text-primary">Uiltima Entrega: 02 de julio</span>
+              <div class="widget-controls">
+                  <a data-widgster="load" title="Notificar" href="#"><i class="fa fa-refresh"></i></a>
+              </div>
+          </header>
+      </section>
+  </div>
+  <div class="col-md-12 widget-container">
+      <section class="widget" id="news-widget" data-widgster-load="demo/ajax/widgets/news.php">
+          <header>
+              <h3>
+                  Carlos Ruiz Zabaleta <span class="badge bg-success">S./ 32.520</span>
+              </h3>
+              <span class="text-primary">Uiltima Entrega: 02 de julio</span>
+              <div class="widget-controls">
+                  <a data-widgster="load" title="Notificar" href="#"><i class="fa fa-refresh"></i></a>
+              </div>
+          </header>
+      </section>
+  </div>
+  <div class="col-md-12 widget-container">
+      <section class="widget" id="news-widget" data-widgster-load="demo/ajax/widgets/news.php">
+          <header>
+              <h3>
+                  Miriam Domingues <span class="badge bg-success">S./ 88.020</span>
+              </h3>
+              <span class="text-primary">Uiltima Entrega: 02 de julio</span>
+              <div class="widget-controls">
+                  <a data-widgster="load" title="Notificar" href="#"><i class="fa fa-refresh"></i></a>
+              </div>
+          </header>
+      </section>
+  </div>
+</div>
+
+{% endblock main %}

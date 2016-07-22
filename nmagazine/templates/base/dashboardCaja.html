@@ -1,0 +1,51 @@
+{% extends "base/base_caja.html" %}
+{% block title %}  Max Cargo S.A.C {% endblock title %}
+
+        {% block rightmenu %}
+        <!-- main notification links are placed inside of .sidebar-nav -->
+        <h5 class="sidebar-nav-title">Procesos <a class="action-link" href="#"><i class="fa fa-area-chart"></i></a></h5>
+        <ul class="sidebar-nav">
+            <li>
+                <!-- an example of nested submenu. basic bootstrap collapse component -->
+                <a href="{% url 'pagos_app:pagos-cobrar' %}">
+                    <span class="icon">
+                        <i class="fa fa-money"></i>
+                    </span>
+                    Cobros
+                </a>
+            </li>
+            <li>
+                <!-- an example of nested submenu. basic bootstrap collapse component -->
+                <a href="{% url 'pagos_app:pagos-cudarar' %}">
+                    <span class="icon">
+                        <i class="fa fa-balance-scale"></i>
+                    </span>
+                    Cuadrar Caja
+                </a>
+            </li>
+        </ul>
+        <h5 class="sidebar-nav-title">Reportes <a class="action-link" href="#"><i class="fa fa-area-chart"></i></a></h5>
+        <ul class="sidebar-nav">
+            <li>
+                <!-- an example of nested submenu. basic bootstrap collapse component -->
+                <a href="{% url 'pagos_app:pagos-faltantes' %}">
+                    <span class="icon">
+                        <i class="fa fa-dollar"></i>
+                    </span>
+                    Faltantes
+                </a>
+            </li>
+            <li>
+                <!-- an example of nested submenu. basic bootstrap collapse component -->
+                <a href="{% url 'pagos_app:pagos-devoluciones' %}">
+                    <span class="icon">
+                        <i class="fa fa-chevron-circle-left"></i>
+                    </span>
+                    Devoluciones
+                </a>
+            </li>
+        </ul>
+{% endblock rightmenu %}
+
+{% block main %}
+{% endblock main %}

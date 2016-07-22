@@ -1,0 +1,131 @@
+{% extends "base/dashboardCaja.html" %}
+
+{% block title %} Cuadrar Caja {% endblock title %}
+
+
+{% block main %}
+<div class="row">
+    <div class="col-md-6">
+        <section class="widget bg-success text-white">
+            <div class="widget-body clearfix">
+                <div class="row">
+                    <div class="col-xs-12">
+                      <h5 class="no-margin">Monto Cobrado</h5>
+                        <p class="h3 no-margin fw-normal">S./ 200000.000</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="col-md-6">
+        <section class="widget bg-primary text-white">
+            <div class="widget-body clearfix">
+                <div class="row">
+                    <div class="col-xs-12">
+                      <h5 class="no-margin">Monto Por Cobrar</h5>
+                        <p class="h3 no-margin fw-normal">S./ 5000000.000</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12">
+        <section class="widget widget-chart-stats-simple">
+            <header>
+              <h3 class="text-center">Lista de Movimientos</h3>
+            </header>
+            <div class="widget-body">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <td>
+                        Vendedor
+                      </td>
+                      <td>
+                        Diario/Producto
+                      </td>
+                      <td>
+                        Cantidad
+                      </td>
+                      <td>
+                        Total
+                      </td>
+                      </td>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr>
+                      <td>Alberto Rojas</td>
+                      <td>Peru 21 Lubes-sabado</td>
+                      <td>8</td>
+                      <td><span class="text-primary"><strong>S/. 6.000</strong></span></td>
+                    </tr>
+                    <tr>
+                      <td>Carlos Condori</td>
+                      <td>Correo Lubes-sabado</td>
+                      <td>8</td>
+                      <td><span class="text-primary"><strong>S/. 8.000</strong></span></td>
+                    </tr>
+                    <tr>
+                      <td>Jorge Medrano</td>
+                      <td>Trome Lubes-sabado</td>
+                      <td>2</td>
+                      <td><span class="text-primary"><strong>S/. 1.200</strong></span></td>
+                    </tr>
+                    <tr>
+                      <td>Alberto Rojas</td>
+                      <td>Peru 21 Lubes-sabado</td>
+                      <td>8</td>
+                      <td><span class="text-primary"><strong>S/. 6.000</strong></span></td>
+                    </tr>
+                    <tr>
+                      <td>Carlos Condori</td>
+                      <td>Correo Lubes-sabado</td>
+                      <td>8</td>
+                      <td><span class="text-primary"><strong>S/. 8.000</strong></span></td>
+                    </tr>
+                    <tr>
+                      <td>Jorge Medrano</td>
+                      <td>Trome Lubes-sabado</td>
+                      <td>2</td>
+                      <td><span class="text-primary"><strong>S/. 1.200</strong></span></td>
+                    </tr>
+                    <tr>
+                      <td>Alberto Rojas</td>
+                      <td>Peru 21 Lubes-sabado</td>
+                      <td>8</td>
+                      <td><span class="text-primary"><strong>S/. 6.000</strong></span></td>
+                    </tr>
+                    <tr>
+                      <td>Carlos Condori</td>
+                      <td>Correo Lubes-sabado</td>
+                      <td>8</td>
+                      <td><span class="text-primary"><strong>S/. 8.000</strong></span></td>
+                    </tr>
+                    <tr>
+                      <td>Jorge Medrano</td>
+                      <td>Trome Lubes-sabado</td>
+                      <td>2</td>
+                      <td><span class="text-primary"><strong>S/. 1.200</strong></span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+        </section>
+    </div>
+    <div class="form-actions">
+        <div class="row">
+            <div class="col-sm-offset-5 col-sm-7">
+              <button class="btn btn-primary">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main %}
